@@ -4,7 +4,7 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
 Tested up to: 3.2.1
-Stable tag: trunk
+Stable tag: 1.01
 
 'Catagories by Tag Table' displays all your Catagories as rows and Tags as columns in a html table.
 
