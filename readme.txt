@@ -4,14 +4,14 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
 Tested up to: 3.2.1
-Stable tag: 1.01
+Stable tag: 1.02
 
 'Catagories by Tag Table' displays all your Catagories as rows and Tags as columns in a html table.
 
 == Description ==
 
 'Catagories by Tag Table' allows you to display all your Catagories as rows and Tags as columns in a html table.
-Once activated it will replace the text '[CATS_BY_TAGS_TABLE]' in any post or page with a table.
+Once activated it will replace the text '**[CATS_BY_TAGS_TABLE]**' in any post or page with a table.
 Each cell displays the number of posts that are in both the category and have the tag, and a URL link to those posts.
 It might be a useful way to list your content for navigation or embed as a menu.
 
@@ -25,13 +25,13 @@ The options menu allows you to;
 1. Upload `cat-by-tags-table.php` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Configure through 'Options' menu.
-1. Include the text '[CATS_BY_TAGS_TABLE]' in a post or page content 
+1. Include the text '**[CATS_BY_TAGS_TABLE]**' in a post or page content 
 *   alternatively you may place the following php code in your page.php file...
 `<?php if(function_exists("display_cats_by_tag")){echo display_cats_by_tag();} ?>`
 
 == Screenshots ==
 
-1. This is a screen shot of the table generated in a post and corresponds to `/cat-by-tags-table/screenshot1.png`
+1. This is a screen shot of the table generated in a post and corresponds to `/tags/1.02/screenshot1.png`
 
 
 == Frequently Asked Questions ==
@@ -42,17 +42,23 @@ if you want to do more than this you might edit the Stylesheet of your theme
 
 == Changelog ==
 
+= 1.02 =
+Tidy up a few minor bits and bobs
+
 = 1.01 =
 First stable release
 
 == Upgrade Notice ==
+
+= 1.02 =
+I wouldn't bother updating for this
 
 = 1.01 =
 First stable release
 
 == License ==
 
-Copyright 2011  Phil Newby  (email: phil@haroldstreet.org.uk )
+Copyright 2011  Phil Newby  email: phil (at) haroldstreet (dot) org (dot) uk 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
