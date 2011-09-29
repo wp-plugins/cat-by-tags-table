@@ -3,7 +3,7 @@
 Plugin Name: Catagories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Catagories as rows and Tags as columns in a html table.
-Version: 1.01
+Version: 1.02
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
