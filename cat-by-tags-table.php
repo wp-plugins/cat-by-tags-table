@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Catagories by Tag Table
-Plugin URI: 
+Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Catagories as rows and Tags as columns in a html table.
 Version: 1.01
 Author: haroldstreet
@@ -14,7 +14,7 @@ $display_cats_by_tag_textdomain = 'display_cats_by_tag';
 // Add the page to the options menu
 function display_cats_by_tag_admin_menu() {
 	global $display_cats_by_tag_textdomain;
-	add_options_page(__('Display Catagories by Tags Table:', $display_cats_by_tag_textdomain), __('Catagories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
+	add_options_page(__('Display Catagories by Tag Table:', $display_cats_by_tag_textdomain), __('Catagories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
 
 	// WPMU 2.7
 	if ( function_exists('register_setting') ) {
