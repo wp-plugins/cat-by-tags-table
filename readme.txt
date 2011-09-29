@@ -31,7 +31,7 @@ The options menu allows you to;
 
 == Screenshots ==
 
-1. This is a screen shot of the table generated in a post and corresponds to `/tags/1.02/screenshot1.png`
+1. This is a screen shot of a 'Catagories by Tag Table' generated in a post on my blog
 
 
 == Frequently Asked Questions ==
