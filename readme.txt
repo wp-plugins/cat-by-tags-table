@@ -4,21 +4,22 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
 Tested up to: 3.2.1
-Stable tag: 1.02
+Stable tag: 1.03
 
 'Catagories by Tag Table' displays all your Catagories as rows and Tags as columns in a html table.
 
 == Description ==
 
-'Catagories by Tag Table' allows you to display all your Catagories as rows and Tags as columns in a html table.
+**'Catagories by Tag Table'** allows you to display all your Catagories as rows and Tags as columns in a html table.
 Once activated it will replace the text '**[CATS_BY_TAGS_TABLE]**' in any post or page with a table.
 Each cell displays the number of posts that are in both the category and have the tag, and a URL link to those posts.
 It might be a useful way to list your content for navigation or embed as a menu.
 
 The options menu allows you to; 
-*   specify the text displayed in the first cell
-*   specify the basic CSS style of the table's <td> elements
-*   specify whether Categories are rows with tags as columns or vice versa
+1. specify whether Categories are rows with tags as columns or vice versa
+1. specify the text displayed in the first cell
+1. specify the basic CSS style of the table's <td> elements
+1. specify what to show in an empty cell
 
 == Installation ==
 
@@ -31,7 +32,8 @@ The options menu allows you to;
 
 == Screenshots ==
 
-1. This is a screen shot of a 'Catagories by Tag Table' generated in a post on my blog
+1. An example 'Catagories by Tag Table' generated in a post on my blog
+1. The Options menu in Wordpress
 
 
 == Frequently Asked Questions ==
@@ -42,6 +44,9 @@ if you want to do more than this you might edit the Stylesheet of your theme
 
 == Changelog ==
 
+= 1.03 =
+New options added
+
 = 1.02 =
 Tidy up a few minor bits and bobs
 
@@ -49,6 +54,9 @@ Tidy up a few minor bits and bobs
 First stable release
 
 == Upgrade Notice ==
+
+= 1.03 =
+Upgrade to customise contentes of an empty cell
 
 = 1.02 =
 I wouldn't bother updating for this
@@ -58,7 +66,7 @@ First stable release
 
 == License ==
 
-Copyright 2011  Phil Newby  email: phil (at) haroldstreet (dot) org (dot) uk 
+Copyright 2011  Phil Newby  email: *phil (at) haroldstreet (dot) org (dot) uk* 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
