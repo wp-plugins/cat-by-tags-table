@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Catagories by Tag Table
+Plugin Name: Categories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
-Description: Display all your Catagories as rows and Tags as columns in a html table.
-Version: 1.03
+Description: Display all your Categories as rows and Tags as columns in a html table.
+Version: 1.04
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
@@ -14,7 +14,7 @@ $display_cats_by_tag_textdomain = 'display_cats_by_tag';
 // Add the page to the options menu
 function display_cats_by_tag_admin_menu() {
 	global $display_cats_by_tag_textdomain;
-	add_options_page(__('Display Catagories by Tag Table:', $display_cats_by_tag_textdomain), __('Catagories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
+	add_options_page(__('Display Categories by Tag Table:', $display_cats_by_tag_textdomain), __('Categories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
 
 	// WPMU 2.7
 	if ( function_exists('register_setting') ) {
@@ -37,8 +37,8 @@ function display_cats_by_tag_admin_page() {
 		'display_cats_by_tag_emptycell');
 ?>
 <div class="wrap">
-	<h2><?php _e('Catagories by Tags Table:', $display_cats_by_tag_textdomain); ?></h2>
-	<p><strong><?php _e('Catagories by Tag Table', $display_cats_by_tag_textdomain); ?></strong> <?php _e('allows you to display a table of all your Categories and tags.<br />Each cell displays the number of posts that are in both the category and have the tag &amp; a link to those posts.', $display_cats_by_tag_textdomain); ?></p>
+	<h2><?php _e('Categories by Tags Table:', $display_cats_by_tag_textdomain); ?></h2>
+	<p><strong><?php _e('Categories by Tag Table', $display_cats_by_tag_textdomain); ?></strong> <?php _e('allows you to display a table of all your Categories and tags.<br />Each cell displays the number of posts that are in both the category and have the tag &amp; a link to those posts.', $display_cats_by_tag_textdomain); ?></p>
 
 	<form action="options.php" method="post">
 		<?php if (function_exists('settings_fields')) { settings_fields('display_cats_by_tag_options'); } else if (function_exists('wp_nonce_field')) { wp_nonce_field('update-options'); ?>
@@ -48,13 +48,13 @@ function display_cats_by_tag_admin_page() {
 
 		<!-- Set Table Direction -->
 		<p><?php _e(''); ?> <strong><?php _e('Table Direction', $display_cats_by_tag_textdomain); ?></strong>?<br />
-			<input type="radio" name="display_cats_by_tag_direction" id="display_cats_by_tag_direction_yes" value="1"<?php if (get_option('display_cats_by_tag_direction')==1):?> checked="checked"<?php endif; ?> /> <label for="display_cats_by_tag_direction_yes"><?php _e('Catagories as rows with tags as columns', $display_cats_by_tag_textdomain); ?></label> &nbsp;
-			<input type="radio" name="display_cats_by_tag_direction" id="display_cats_by_tag_direction_no" value="0"<?php if ( get_option('display_cats_by_tag_direction')!=1):?> checked="checked"<?php endif; ?> /> <label for="display_cats_by_tag_direction_no"><?php _e('Tags as rows with catagories as columns', $display_cats_by_tag_textdomain); ?></label></p>
+			<input type="radio" name="display_cats_by_tag_direction" id="display_cats_by_tag_direction_yes" value="1"<?php if (get_option('display_cats_by_tag_direction')==1):?> checked="checked"<?php endif; ?> /> <label for="display_cats_by_tag_direction_yes"><?php _e('Categories as rows with tags as columns', $display_cats_by_tag_textdomain); ?></label> &nbsp;
+			<input type="radio" name="display_cats_by_tag_direction" id="display_cats_by_tag_direction_no" value="0"<?php if ( get_option('display_cats_by_tag_direction')!=1):?> checked="checked"<?php endif; ?> /> <label for="display_cats_by_tag_direction_no"><?php _e('Tags as rows with Categories as columns', $display_cats_by_tag_textdomain); ?></label></p>
 
-		<!-- Text for Catagories in Table -->
+		<!-- Text for Categories in Table -->
 		<p><?php _e('What text would you like in the first cell of the table', $display_cats_by_tag_textdomain); ?><br />
 			<label for="display_cats_by_tag_table_title"><strong><?php _e('Text:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_table_title" id="display_cats_by_tag_table_title" value="<?php echo get_option('display_cats_by_tag_table_title'); ?>" style="width: 50%" />
-			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_table_title').value='<h3>Catagories by Tags</h3>';"><?php _e('default'); ?></a>)</small></p>
+			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_table_title').value='<h3>Categories by Tags</h3>';"><?php _e('default'); ?></a>)</small></p>
 
 		<!-- Text for Tabs in Table -->
 		<p><?php _e('What style would you like for the table <td> cells', $display_cats_by_tag_textdomain); ?><br />
@@ -95,7 +95,7 @@ function display_cats_by_tag() {
 	$emptycell=get_option('display_cats_by_tag_emptycell') ;
 	$tabletitletxt = get_option('display_cats_by_tag_table_title') ;
 	$cellstyletxt = get_option('display_cats_by_tag_cell_style') ;
-	if($tabletitletxt==''){$tabletitletxt="<h3>Catagories by Tags</h3>";}
+	if($tabletitletxt==''){$tabletitletxt="<h3>Categories by Tags</h3>";}
 	if($cellstyletxt==''){$cellstyletxt="border:1px solid #ccc;width:1em;";}
 
 	// then make the code to insert
@@ -233,8 +233,8 @@ function display_cats_by_tag_filter( $content ) {
  */
 function display_cats_by_tag_activate () {
 	// Add the options
-	add_option('display_cats_by_tag_direction', 1, 'Table Direction; Catagories by tag or Tags by catagories', 'yes');
-	add_option('display_cats_by_tag_table_title', '<h3>Catagories by Tags</h3>', 'Give the Table title', 'yes');
+	add_option('display_cats_by_tag_direction', 1, 'Table Direction; Categories by tag or Tags by Categories', 'yes');
+	add_option('display_cats_by_tag_table_title', '<h3>Categories by Tags</h3>', 'Give the Table title', 'yes');
 	add_option('display_cats_by_tag_cell_style', 'border:1px solid #ccc;width:1em;', 'Customise the style of the table cells', 'yes');
 	add_option('display_cats_by_tag_emptycell', '&nbsp;', 'Content for empty cells', 'yes');
 }
