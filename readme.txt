@@ -4,7 +4,7 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
 Tested up to: 3.2.1
-Stable tag: 1.04
+Stable tag: 2.01
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -20,6 +20,7 @@ The options menu allows you to:
 *	specify the text displayed in the first cell;
 *	specify the basic CSS style of the table's `<td>` elements;
 *	specify what to show in an empty cell;
+*	specify any charicters to remove from Tag & Category names;
 
 == Installation ==
 
@@ -44,6 +45,9 @@ if you want to do more than this you might edit the Stylesheet of your theme
 
 == Changelog ==
 
+= 2.01 =
+A major revision of the code and some new options
+
 = 1.04 =
 Some minor spelling corrections
 
@@ -57,6 +61,9 @@ Tidy up a few minor bits and bobs
 First stable release
 
 == Upgrade Notice ==
+
+= 2.01 =
+A major revision of the code and some new options
 
 = 1.04 =
 Some minor spelling corrections

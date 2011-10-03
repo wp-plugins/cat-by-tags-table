@@ -3,7 +3,7 @@
 Plugin Name: Categories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Categories as rows and Tags as columns in a html table.
-Version: 1.04
+Version: 2.01
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
@@ -14,14 +14,15 @@ $display_cats_by_tag_textdomain = 'display_cats_by_tag';
 // Add the page to the options menu
 function display_cats_by_tag_admin_menu() {
 	global $display_cats_by_tag_textdomain;
-	add_options_page(__('Display Categories by Tag Table:', $display_cats_by_tag_textdomain), __('Categories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
+	add_options_page(__('Categories by Tag Table', $display_cats_by_tag_textdomain), __('Categories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
 
 	// WPMU 2.7
 	if ( function_exists('register_setting') ) {
 		register_setting('display_cats_by_tag_options','display_cats_by_tag_direction');
 		register_setting('display_cats_by_tag_options','display_cats_by_tag_table_title');
 		register_setting('display_cats_by_tag_options','display_cats_by_tag_cell_style');
-		register_setting('display_cats_by_tag_options','display_cats_by_tag_emptycell');
+		register_setting('display_cats_by_tag_options','display_cats_by_tag_replace_text');		
+		register_setting('display_cats_by_tag_options','display_cats_by_tag_empty_cell');
 	}
 }
 
@@ -34,37 +35,44 @@ function display_cats_by_tag_admin_page() {
 		'display_cats_by_tag_direction',
 		'display_cats_by_tag_table_title',
 		'display_cats_by_tag_cell_style',
-		'display_cats_by_tag_emptycell');
+		'display_cats_by_tag_replace_text',
+		'display_cats_by_tag_empty_cell');
 ?>
-<div class="wrap">
-	<h2><?php _e('Categories by Tags Table:', $display_cats_by_tag_textdomain); ?></h2>
+<div class="wrap">	
+	<h2><div id="icon-themes" class="icon32"></div><?php _e('Categories by Tags Table', $display_cats_by_tag_textdomain); ?></h2>
 	<p><strong><?php _e('Categories by Tag Table', $display_cats_by_tag_textdomain); ?></strong> <?php _e('allows you to display a table of all your Categories and tags.<br />Each cell displays the number of posts that are in both the category and have the tag &amp; a link to those posts.', $display_cats_by_tag_textdomain); ?></p>
 
 	<form action="options.php" method="post">
 		<?php if (function_exists('settings_fields')) { settings_fields('display_cats_by_tag_options'); } else if (function_exists('wp_nonce_field')) { wp_nonce_field('update-options'); ?>
 		<input type="hidden" name="action" value="update" />
 		<input type="hidden" name="page_options" value="<?php echo join(',', $optionvars); ?>"/>
-	<?php } // if nonce_field ?>
+		<?php } // if nonce_field ?>
 
 		<!-- Set Table Direction -->
-		<p><?php _e(''); ?> <strong><?php _e('Table Direction', $display_cats_by_tag_textdomain); ?></strong>?<br />
-			<input type="radio" name="display_cats_by_tag_direction" id="display_cats_by_tag_direction_yes" value="1"<?php if (get_option('display_cats_by_tag_direction')==1):?> checked="checked"<?php endif; ?> /> <label for="display_cats_by_tag_direction_yes"><?php _e('Categories as rows with tags as columns', $display_cats_by_tag_textdomain); ?></label> &nbsp;
-			<input type="radio" name="display_cats_by_tag_direction" id="display_cats_by_tag_direction_no" value="0"<?php if ( get_option('display_cats_by_tag_direction')!=1):?> checked="checked"<?php endif; ?> /> <label for="display_cats_by_tag_direction_no"><?php _e('Tags as rows with Categories as columns', $display_cats_by_tag_textdomain); ?></label></p>
+		<p><strong><?php _e('Table Direction:', $display_cats_by_tag_textdomain); ?></strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="display_cats_by_tag_direction" id="display_cats_by_tag_direction_yes" value="1"<?php if (get_option('display_cats_by_tag_direction')==1):?> checked="checked"<?php endif; ?> /> <label for="display_cats_by_tag_direction_yes"><?php _e('Categories as rows with tags as columns', $display_cats_by_tag_textdomain); ?></label><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="display_cats_by_tag_direction" id="display_cats_by_tag_direction_no" value="0"<?php if ( get_option('display_cats_by_tag_direction')!=1):?> checked="checked"<?php endif; ?> /> <label for="display_cats_by_tag_direction_no"><?php _e('Tags as rows with Categories as columns', $display_cats_by_tag_textdomain); ?></label></p>
 
 		<!-- Text for Categories in Table -->
-		<p><?php _e('What text would you like in the first cell of the table', $display_cats_by_tag_textdomain); ?><br />
-			<label for="display_cats_by_tag_table_title"><strong><?php _e('Text:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_table_title" id="display_cats_by_tag_table_title" value="<?php echo get_option('display_cats_by_tag_table_title'); ?>" style="width: 50%" />
+		<p><?php _e('What title text would you like in the first cell of the table', $display_cats_by_tag_textdomain); ?><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="display_cats_by_tag_table_title"><strong><?php _e('Title Text:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_table_title" id="display_cats_by_tag_table_title" value="<?php echo get_option('display_cats_by_tag_table_title'); ?>" style="width: 50%" />
 			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_table_title').value='<h3>Categories by Tags</h3>';"><?php _e('default'); ?></a>)</small></p>
 
 		<!-- Text for Tabs in Table -->
-		<p><?php _e('What style would you like for the table <td> cells', $display_cats_by_tag_textdomain); ?><br />
-			<label for="display_cats_by_tag_cell_style"><strong><?php _e('CSS Style:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_cell_style" id="display_cats_by_tag_cell_style" value="<?php echo get_option('display_cats_by_tag_cell_style'); ?>" style="width: 50%" />
+		<p><?php _e('What CSS style would you like for all the table <td> cells', $display_cats_by_tag_textdomain); ?><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="display_cats_by_tag_cell_style"><strong><?php _e('<td> CSS Style:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_cell_style" id="display_cats_by_tag_cell_style" value="<?php echo get_option('display_cats_by_tag_cell_style'); ?>" style="width: 50%" />
 			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_cell_style').value='border:1px solid #ccc;width:1em;';"><?php _e('default'); ?></a>)</small></p>
 
-		<!-- Text for Tabs in Table -->
-		<p><?php _e('What  would you like to display in any empty cells', $display_cats_by_tag_textdomain); ?><br />
-			<label for="display_cats_by_tag_cell_style"><strong><?php _e('Empty Cell Text:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_emptycell" id="display_cats_by_tag_emptycell" value="<?php echo get_option('display_cats_by_tag_emptycell'); ?>" style="width: 50%" />
-			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_emptycell').value='&nbsp;';"><?php _e('default'); ?></a>)</small></p>
+		<!-- Text for empty cells in Table -->
+		<p><?php _e('What text would you like to display in any empty cells', $display_cats_by_tag_textdomain); ?><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="display_cats_by_tag_cell_style"><strong><?php _e('Text for Empty Cell:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_empty_cell" id="display_cats_by_tag_empty_cell" value="<?php echo get_option('display_cats_by_tag_empty_cell'); ?>" style="width: 40%" />
+			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_empty_cell').value='&nbsp;';"><?php _e('default'); ?></a>)</small></p>
+
+		<!-- Text to Remove from Cats & Tags -->
+		<p><?php _e('Remove the following charicters from Tag &amp; Category names', $display_cats_by_tag_textdomain); ?><br />
+		<?php _e("You can separate a list of characters &amp; text phrases with commas ',' only (i.e. no spaces)", $display_cats_by_tag_textdomain); ?><br /> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="display_cats_by_tag_replace_text"><strong><?php _e('Remove Text:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_replace_text" id="display_cats_by_tag_replace_text" value="<?php echo get_option('display_cats_by_tag_replace_text'); ?>" style="width: 45%" />
+			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_replace_text').value='';"><?php _e('default'); ?></a>)</small></p>
 
 
 		<!-- submit the form -->
@@ -92,7 +100,8 @@ function display_cats_by_tag() {
 	global $id, $wpdb;
 	// now we need to get a couple settings
 	$direction=get_option('display_cats_by_tag_direction') ;
-	$emptycell=get_option('display_cats_by_tag_emptycell') ;
+	$emptycell=get_option('display_cats_by_tag_empty_cell') ;
+	$replace_text=explode(",",get_option('display_cats_by_tag_replace_text')) ;
 	$tabletitletxt = get_option('display_cats_by_tag_table_title') ;
 	$cellstyletxt = get_option('display_cats_by_tag_cell_style') ;
 	if($tabletitletxt==''){$tabletitletxt="<h3>Categories by Tags</h3>";}
@@ -113,105 +122,88 @@ function display_cats_by_tag() {
 
 	$tablehtml = '<table style="border-collapse:collapse;">'; //START HTML
 	//HEADER ROW
-	if($direction==1){// CATS BY TAG
-		$tablehtml .= '<thead style="max-height:15em;"><th style="'.$cellstyletxt.'">'.$tabletitletxt.'</td>'; //TAG Title Line
-			$tags=get_categories($tag_args);
-			foreach($tags as $tag) {
-				$tablehtml .= '<td style="height:100%;vertical-align:bottom;'.$cellstyletxt.'">';
-				// If Internet Explorer do the nifty rotate text thing...
-				$tablehtml .= '<!--[If IE]><div style="writing-mode:tb-rl; filter:flipv fliph;max-height:7em;"><![endif]-->';
-				// If NOT Internet Explorer do this instead...
-				$tablehtml .= '<!--[if !IE]>-->';
-				$tablehtml .= '<div style="max-width:0.5em;max-width:0.5em;word-wrap:break-word;font-family:\'Lucida Console\',Monotype; ">';
-				$tablehtml .= '<!--<![endif]-->';
-
-				$tablehtml .= '<div style="vertical-align:bottom">';
-				$tablehtml .= '<a style="vertical-align:bottom;" href="?tag='.urlencode($tag->slug).'">'.substr(str_replace("Sym:","",str_replace("Flowers:","",str_replace("|","",str_replace(" ","",str_replace("-","",$tag->name))))),0,10).'</a>';
-				$tablehtml .= '</div>';
-				$tablehtml .= '</div>';
-				$tablehtml .= '</th>';
-			}
-		$tablehtml .= '</thead>';
-
-		//TABLE ROWS
-		$categories=get_categories($cat_args);
-		foreach($categories as $category) {
-
-			$catID=$category->term_id;
-			$tablehtml .= '<tr><td style="'.$cellstyletxt.'"><a href="' . get_category_link( $catID ) . '" title="' . sprintf( __( "View all %s" ), $category->name ) . '" ' . '>' . $category->name.'</a></td>';
-
-			$tags=get_categories($tag_args);
-			foreach($tags as $tag) {
-
-				$tagID=$tag->term_id;
-
-				$countsql ="SELECT COUNT(*) FROM ( ";
-				$countsql.="(SELECT object_id AS tag_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$tagID." ) AS tags ";
-				$countsql.="INNER JOIN ";
-				$countsql.="(SELECT object_id AS cat_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$catID." ) AS cats ";
-				$countsql.="ON tag_object_id = cat_object_id ) ";
-
-				$countresult = mysql_query($countsql) or die(mysql_error());
-				$countfrow = mysql_fetch_array($countresult) ;
-				$count = $countfrow[0] ;
-
-				$tablehtml .= '<td style="'.$cellstyletxt.'">';
-				if($count>=1){$tablehtml .= '<a href="'.get_category_link( $catID ).'&amp;tag='.urlencode($tag->slug).'" title="View '.$count." ".sprintf( __( "%s" ), str_replace("|","",str_replace(" ","",str_replace("-","",$tag->name))) ).sprintf( __( " %s" ), $category->name ).'"><b>'.$count.'</b></a>';}
-				else {$tablehtml .= $emptycell;}
-				$tablehtml .= '</td>';
-			}
-		$tablehtml .= '</tr>';
+	$tablehtml .= '<thead style="max-height:15em;"><th style="'.$cellstyletxt.'">'.$tabletitletxt.'</td>'; //TAG Title Line
+	if($direction==1){ // CATS BY TAG
+		$cols=get_categories($tag_args); 		
+	}else{  // TAGS BY CAT	
+		$cols=get_categories($cat_args); 
+	}	
+	foreach($cols as $col) {
+		
+		$tablehtml .= '<td style="height:100%;vertical-align:bottom;'.$cellstyletxt.'">';
+		// If Internet Explorer do the nifty rotate text thing...
+		$tablehtml .= '<!--[If IE]><div style="writing-mode:tb-rl; filter:flipv fliph;max-height:7em;"><![endif]-->';
+		// If NOT Internet Explorer do the next best thing instead...
+		$tablehtml .= '<!--[if !IE]>-->';
+		$tablehtml .= '<div style="max-width:0.5em;max-width:0.5em;word-wrap:break-word;font-family:\'Lucida Console\',Monotype; ">';
+		$tablehtml .= '<!--<![endif]-->';
+		$tablehtml .= '<div style="vertical-align:bottom">';
+		
+		if($direction==1){ // CATS BY TAG
+			$tablehtml .= '<a style="vertical-align:bottom;" href="?tag='.urlencode($col->slug).'">';
+		}else{ // TAGS BY CAT
+			$tablehtml .= '<a style="vertical-align:bottom;" href="'.get_category_link( $col->term_id ).'">';
 		}
-	} else {// TAGS BY CAT
-		$tablehtml .= '<thead style="max-height:15em;"><th style="'.$cellstyletxt.'">'.$tabletitletxt.'</td>'; //cat Title Line
-			$cats=get_categories($cat_args);
-			foreach($cats as $cat) {
-				$catID=$cat->term_id;
-				$tablehtml .= '<td style="height:100%;vertical-align:bottom;'.$cellstyletxt.'">';
-				// If Internet Explorer do the nifty rotate text thing...
-				$tablehtml .= '<!--[If IE]><div style="writing-mode:tb-rl; filter:flipv fliph;max-height:7em;"><![endif]-->';
-				// If NOT Internet Explorer do this instead...
-				$tablehtml .= '<!--[if !IE]>-->';
-				$tablehtml .= '<div style="max-width:0.5em;max-width:0.5em;word-wrap:break-word;font-family:\'Lucida Console\',Monotype; ">';
-				$tablehtml .= '<!--<![endif]-->';
+		
+		$name = substr(str_replace($replace_text,"",$col->name),0,10);
+		$tablehtml .= $name.'</a>';
+						
+		$tablehtml .= '</div>';
+		$tablehtml .= '</div>';
+		$tablehtml .= '</th>';
+	}
+	$tablehtml .= '</thead>';
 
-				$tablehtml .= '<div style="vertical-align:bottom">';
-				$tablehtml .= '<a style="vertical-align:bottom;" href="'.get_category_link( $catID ).'">'.substr(str_replace("Sym:","",str_replace("Flowers:","",str_replace("|","",str_replace(" ","",str_replace("-","",$cat->name))))),0,10).'</a>';
-				$tablehtml .= '</div>';
-				$tablehtml .= '</div>';
-				$tablehtml .= '</th>';
-			}
-		$tablehtml .= '</thead>';
+	//TABLE ROWS
+	if($direction==1){ // CATS BY TAG
+		$rows=get_categories($cat_args); 
+	}else{ // TAGS BY CAT	
+		$rows=get_categories($tag_args); 		 	
+	}
+	foreach($rows as $row) {	
+		$tablehtml .= '<tr><td style="'.$cellstyletxt.'"><a href="';
+		if($direction==1){  // CATS BY TAG
+			$tablehtml .= get_category_link( $row->term_id );
+			$cols=get_categories($tag_args);
+		}else{ // TAGS BY CAT
+			$tablehtml .= '?tag='.urlencode($row->slug);
+			$cols=get_categories($cat_args);
+		}		
+		
+		$rowname = str_replace($replace_text,"",$row->name);
+		$tablehtml .= '" title="' . sprintf( __( "View all %s" ), $row->name ) . '" ' . '>' . $rowname.'</a></td>';	
+		foreach($cols as $col) {
 
-		//TABLE ROWS
-		$tags=get_categories($tag_args);
-		foreach($tags as $tag) {
+			$colID=$col->term_id;
 
-			$tagID=$tag->term_id;
-			$tablehtml .= '<tr><td style="'.$cellstyletxt.'"><a href="?tag='.urlencode($tag->slug).'" title="' . sprintf( __( "View all %s" ), $tag->name ) . '" ' . '>' . $tag->name.'</a></td>';
+			$countsql ="SELECT COUNT(*) FROM ( ";
+			$countsql.="(SELECT object_id AS col_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$col->term_id." ) AS cols ";
+			$countsql.="INNER JOIN ";
+			$countsql.="(SELECT object_id AS row_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$row->term_id." ) AS rows ";
+			$countsql.="ON col_object_id = row_object_id ) ";
 
-			$cats=get_categories($cat_args);
-			foreach($cats as $cat) {
+			$countresult = mysql_query($countsql) or die(mysql_error());
+			$countfrow = mysql_fetch_array($countresult) ;
+			$count = $countfrow[0] ;
 
-				$catID=$cat->term_id;
-
-				$countsql ="SELECT COUNT(*) FROM ( ";
-				$countsql.="(SELECT object_id AS cat_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$catID." ) AS cats ";
-				$countsql.="INNER JOIN ";
-				$countsql.="(SELECT object_id AS tag_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$tagID." ) AS tags ";
-				$countsql.="ON cat_object_id = tag_object_id ) ";
-
-				$countresult = mysql_query($countsql) or die(mysql_error());
-				$countfrow = mysql_fetch_array($countresult) ;
-				$count = $countfrow[0] ;
-
-				$tablehtml .= '<td style="'.$cellstyletxt.'">';
-				if($count>=1){$tablehtml .= '<a href="'.get_category_link( $catID ).'&amp;tag='.urlencode($tag->slug).'" title="View '.$count." ".sprintf( __( "%s" ), str_replace("|","",str_replace(" ","",str_replace("-","",$tag->name))) ).sprintf( __( " %s" ), $category->name ).'"><b>'.$count.'</b></a>';}
-				else {$tablehtml .= $emptycell;}
-				$tablehtml .= '</td>';
-			}
-		$tablehtml .= '</tr>';
+			$tablehtml .= '<td style="'.$cellstyletxt.'">';
+			if($count>=1){
+				if($direction==1){ // CATS BY TAG
+					$catID = $row->term_id;	
+					$tagslug = $col->slug;
+					$tagname = $col->name;
+					$catname = $row->name;											
+				}else{  // TAGS BY CAT	
+					$catID = $col->term_id;	
+					$tagslug = $row->slug;
+					$tagname = $row->name;
+					$catname = $col->name;							
+				}	
+				$tablehtml .= '<a href="'.get_category_link( $catID ).'&amp;tag='.urlencode($tagslug).'" title="View '.$count." ".sprintf( __( "%s" ), $tagname ).sprintf( __( " %s" ), $catname ).'"><b>'.$count.'</b></a>';
+			}else{$tablehtml .= $emptycell;}
+			$tablehtml .= '</td>';
 		}
+	$tablehtml .= '</tr>';
 	}
 	$tablehtml .= '</table>';
 
@@ -236,7 +228,8 @@ function display_cats_by_tag_activate () {
 	add_option('display_cats_by_tag_direction', 1, 'Table Direction; Categories by tag or Tags by Categories', 'yes');
 	add_option('display_cats_by_tag_table_title', '<h3>Categories by Tags</h3>', 'Give the Table title', 'yes');
 	add_option('display_cats_by_tag_cell_style', 'border:1px solid #ccc;width:1em;', 'Customise the style of the table cells', 'yes');
-	add_option('display_cats_by_tag_emptycell', '&nbsp;', 'Content for empty cells', 'yes');
+	add_option('display_cats_by_tag_replace_text', '', 'Remove text from Tags &amp; Cats', 'yes');
+	add_option('display_cats_by_tag_empty_cell', '&nbsp;', 'Content for empty cells', 'yes');
 }
 
 /**
@@ -247,7 +240,8 @@ function display_cats_by_tag_deactivate () {
 	delete_option('display_cats_by_tag_direction');
 	delete_option('display_cats_by_tag_table_title');
 	delete_option('display_cats_by_tag_cell_style');
-	delete_option('display_cats_by_tag_emptycell');
+	delete_option('display_cats_by_tag_replace_text');
+	delete_option('display_cats_by_tag_empty_cell');
 }
 
 // Register everything
