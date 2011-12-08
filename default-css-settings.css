@@ -1,0 +1,26 @@
+#catbytag,
+#catbytag a {
+	vertical-align:bottom;
+	font-weight:normal;
+}
+#catbytag thead { 
+	max-height:15em;
+	vertical-align:bottom;
+	border:1px solid #ccc;
+}
+#catbytag th,
+#catbytag td {
+	height:100%;
+	vertical-align:bottom;
+	border:1px solid #ccc;
+	width:1em; 
+}
+#catbytag .catbytag_NOT_IE { /*Must be a Monotype font*/
+	max-width:0.5em;
+	word-wrap:break-word;
+	font-family:'Lucida Console',Monotype;
+	vertical-align:bottom;
+}
+#catbytag h3{
+	font-weight:normal;
+}
