@@ -3,8 +3,8 @@ Contributors: haroldstreet
 Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
-Tested up to: 3.2.1
-Stable tag: 2.01
+Tested up to: 3.3
+Stable tag: 2.02
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -17,10 +17,10 @@ It might be a useful way to list your content for navigation or embed as a menu.
 
 The options menu allows you to:
 *	specify whether Categories are rows with tags as columns or vice versa;
-*	specify the text displayed in the first cell;
-*	specify the basic CSS style of the table's `<td>` elements;
-*	specify what to show in an empty cell;
-*	specify any charicters to remove from Tag & Category names;
+*	specify the text displayed in the first 'title' cell;
+*	specify the url to your own CSS stylesheet to change the styling;
+*	specify what to show in any empty cells;
+*	specify any charicters to remove from your Tag & Category names;
 
 == Installation ==
 
@@ -36,14 +36,16 @@ The options menu allows you to:
 1. The Options menu in Wordpress
 1. An example 'Categories by Tag Table' generated in a post on my blog
 
-
 == Frequently Asked Questions ==
 
-= Can I change the style of the table =
-You can specify the style of the cells by the <td> style element through options
-if you want to do more than this you might edit the Stylesheet of your theme 
+= Can I customise the css styles of the table =
+You can specify the style most of the table elements through linking to your own stylesheet
+and styling the elements within the div id="catbytag"
 
 == Changelog ==
+
+= 2.02 =
+Option to link to an external stylesheet of your choice, instead of just the style element for the td cells
 
 = 2.01 =
 A major revision of the code and some new options
