@@ -4,7 +4,7 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
 Tested up to: 3.3
-Stable tag: 2.02
+Stable tag: 2.03
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -44,8 +44,11 @@ and styling the elements within the div id="catbytag"
 
 == Changelog ==
 
-= 2.02 =
+= 2.03 =
 Option to link to an external stylesheet of your choice, instead of just the style element for the td cells
+
+= 2.02 =
+a dud upload
 
 = 2.01 =
 A major revision of the code and some new options
