@@ -1,6 +1,10 @@
 #catbytag,
+.catbytag,
+.catbytag-column-heading,
+.catbytag-column-heading a,
 #catbytag a {
 	vertical-align:bottom;
+	text-align:left;
 	font-weight:normal;
 }
 #catbytag thead { 
@@ -13,6 +17,7 @@
 	height:100%;
 	vertical-align:bottom;
 	border:1px solid #ccc;
+	text-align:left;
 	width:1em; 
 }
 #catbytag .catbytag_NOT_IE { /*Must be a Monotype font*/
