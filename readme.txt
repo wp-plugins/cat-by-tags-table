@@ -4,7 +4,7 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
 Tested up to: 3.3
-Stable tag: 2.03
+Stable tag: 2.04
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -16,11 +16,11 @@ Each cell displays the number of posts that are in both the category and have th
 It might be a useful way to list your content for navigation or embed as a menu.
 
 The options menu allows you to:
-*	specify whether Categories are rows with tags as columns or vice versa;
-*	specify the text displayed in the first 'title' cell;
-*	specify the url to your own CSS stylesheet to change the styling;
-*	specify what to show in any empty cells;
-*	specify any charicters to remove from your Tag & Category names;
+* specify whether Categories are rows with tags as columns or vice versa;
+* specify the title text displayed in the top left cell;
+* specify the url to your own CSS stylesheet to customise the styling to match your site;
+* specify what to show in any empty cells;
+* specify any charicters to remove from your Tag & Category names;
 
 == Installation ==
 
@@ -28,7 +28,7 @@ The options menu allows you to:
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Configure through the 'Options' menu under Settings / Categories by Tag
 1. Finally include the text '**[CATS_BY_TAGS_TABLE]**' in any post or page content 
-*   alternatively you may place the following php code in your `page.php` file...
+1. alternatively you may place the following php code in your `page.php` file...
 `<?php if(function_exists("display_cats_by_tag")){echo display_cats_by_tag();} ?>`
 
 == Screenshots ==
@@ -39,16 +39,35 @@ The options menu allows you to:
 == Frequently Asked Questions ==
 
 = Can I customise the css styles of the table =
-You can specify the style most of the table elements through linking to your own stylesheet
-and styling the elements within the div id="catbytag"
+You can specify the style most of the table elements through linking to an external stylesheet of your own and styling the elements within the `<div id="catbytag">`.
+
+The best way to do this is to copy the default stylesheet `default-css-settings.css` (downloaded with the plugin), edit it as you see fit and then save this new file somewhere else on your website. 
+Finally provide the URL to your new stylesheet in the options. 
+
+= The Table Header looks really weird in my version of Internet Explorer =
+Internet Explorer will render the header as text rotated rather than stacked vertically, this usually looks much better.
+
+However if you have problems only in Internet Explorer, then its probably these "nifty rotate text" css rules. 
+To fix this edit the stylesheet (either the default one called `default-css-settings.css` via the plugin editor, or your own external one if you have used the option above) and completely delete the two lines marked that look like this...
+`	max-height:7em;`
+`	writing-mode:tb-rl;` 
+`	filter:flipv fliph;` 
+Finally feplace them to match the styles given for `.catbytag_NOT_IE`
+`	max-width:0.5em;`
+`	word-wrap: break-word;`
+`	font-family:'Lucida Cons`
+`	vertical-align:bottom;`
 
 == Changelog ==
+
+= 2.04 =
+Minor revisions and improvements to the new stylesheet options
 
 = 2.03 =
 Option to link to an external stylesheet of your choice, instead of just the style element for the td cells
 
 = 2.02 =
-a dud upload
+a dud upload - no idea what happened here!
 
 = 2.01 =
 A major revision of the code and some new options
@@ -65,7 +84,16 @@ Tidy up a few minor bits and bobs
 = 1.01 =
 First stable release
 
+= 1000.00 =
+A custom version to display images 
+
 == Upgrade Notice ==
+
+= 2.04 =
+Improved option to link to an external stylesheet of your choice
+
+= 2.03 =
+Option to link to an external stylesheet of your choice, instead of just styling the element for the td cells
 
 = 2.01 =
 A major revision of the code and some new options

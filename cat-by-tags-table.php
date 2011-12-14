@@ -3,7 +3,7 @@
 Plugin Name: Categories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Categories as rows and Tags as columns in a html table.
-Version: 2.03
+Version: 2.04
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
@@ -59,7 +59,7 @@ function display_cats_by_tag_admin_page() {
 			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_table_title').value='<h3>Categories by Tags</h3>';"><?php _e('default'); ?></a>)</small></p>
 
 		<!-- Text for Tabs in Table -->
-		<p><?php _e('What CSS style would you like for all the table <td> cells', $display_cats_by_tag_textdomain); ?><br />
+		<p><?php _e('What external CSS stylesheet would you like to use - give URL', $display_cats_by_tag_textdomain); ?><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="display_cats_by_tag_stylesheet"><strong><?php _e('CSS Stylesheet:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_stylesheet" id="display_cats_by_tag_stylesheet" value="<?php echo get_option('display_cats_by_tag_stylesheet'); ?>" style="width: 75%" />
 			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_stylesheet').value='default-css-settings.css';"><?php _e('default'); ?></a>)</small></p>
 
@@ -69,7 +69,7 @@ function display_cats_by_tag_admin_page() {
 			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_empty_cell').value='&nbsp;';"><?php _e('default'); ?></a>)</small></p>
 
 		<!-- Text to Remove from Cats & Tags -->
-		<p><?php _e('Remove the following charicters from Tag &amp; Category names', $display_cats_by_tag_textdomain); ?><br />
+		<p><?php _e('Remove the following characters from Tag &amp; Category names', $display_cats_by_tag_textdomain); ?><br />
 		<?php _e("You can separate a list of characters &amp; text phrases with commas ',' only (i.e. no spaces)", $display_cats_by_tag_textdomain); ?><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="display_cats_by_tag_replace_text"><strong><?php _e('Remove Text:', $display_cats_by_tag_textdomain); ?></strong></label> <input type="text" name="display_cats_by_tag_replace_text" id="display_cats_by_tag_replace_text" value="<?php echo get_option('display_cats_by_tag_replace_text'); ?>" style="width: 45%" />
 			<small>(<a href="javascript:;" onclick="document.getElementById('display_cats_by_tag_replace_text').value='';"><?php _e('default'); ?></a>)</small></p>
@@ -132,7 +132,7 @@ function display_cats_by_tag() {
 
 		$tablehtml .= '<th class="catbytag">';
 		// If Internet Explorer do the nifty rotate text thing...
-		$tablehtml .= '<!--[if IE]><div style="writing-mode:tb-rl; filter:flipv fliph;max-height:7em;"><![endif]-->';
+		$tablehtml .= '<!--[if IE]><div class="catbytag_IEONLY"><![endif]-->';
 		// If NOT Internet Explorer do the next best thing instead...
 		$tablehtml .= '<!--[if !IE]>-->';
 		$tablehtml .= '<div class="catbytag_NOT_IE">';
@@ -145,7 +145,7 @@ function display_cats_by_tag() {
 			$tablehtml .= '<a href="'.get_category_link( $col->term_id ).'">';
 		}
 
-		$name = substr(str_replace($replace_text,"",$col->name),0,10);
+		$name = substr(str_replace($replace_text,"",$col->name),0,15);
 		$tablehtml .= $name.'</a>';
 
 		$tablehtml .= '</div>';
