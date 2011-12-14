@@ -1,0 +1,39 @@
+#catbytag,
+.catbytag,
+#catbytag a, 
+.catbytag-column-heading,
+.catbytag-column-heading a {
+	vertical-align:bottom;
+	text-align:left;
+	font-weight:normal;
+}
+#catbytag thead { 
+	max-height:15em;
+	vertical-align:bottom;
+	border:1px solid #ccc;
+}
+#catbytag th,
+#catbytag td {
+	height:100%;
+	vertical-align:bottom;
+	border:1px solid #ccc;
+	text-align:left;
+	width:1em; 
+}
+.catbytag_NOT_IE,
+#catbytag .catbytag_NOT_IE { /*Must be a Monotype font*/
+	max-width:0.5em;
+	word-wrap: break-word;
+	font-family:'Lucida Console',Monotype;
+	vertical-align:bottom;
+}
+.catbytag_IEONLY,
+#catbytag .catbytag_IEONLY { /*Nifty Rotate Text thing for Internet Explorer (IE)*/ 
+	font-weight:normal;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */ 
+	max-height:7em;		/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */ 
+	writing-mode:tb-rl;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */ 
+	filter:flipv fliph;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */ 
+}
+#catbytag h3{
+	font-weight:normal;
+}
