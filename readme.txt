@@ -1,22 +1,22 @@
 === Categories by Tag Table ===
 Contributors: haroldstreet
 Donate link: http://www.haroldstreet.org.uk/thanks/
-Tags: html, table, categories, category, tags, tag, embed, list, navigation, menu, post, page, plugin, free
+Tags: html, table, categories, category, tags, tag, pivot, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
-Tested up to: 3.3
-Stable tag: 2.04
+Tested up to: 3.4.2
+Stable tag: 2.05
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
 == Description ==
 
-**'Categories by Tag Table'** allows you to display all your Categories as rows and Tags as columns in a html table.
+**'Categories by Tag Table'** allows you to display all your Categories as rows and Tags as columns in a html pivot table.
 Once activated it will replace the text '**[CATS_BY_TAGS_TABLE]**' in any post or page with a table.
 Each cell displays the number of posts that are in both the category and have the tag, and a URL link to those posts.
 It might be a useful way to list your content for navigation or embed as a menu.
 
 The options menu allows you to:
-* specify whether Categories are rows with tags as columns or vice versa;
+* specify whether Categories are rows with tags as columns in the table or vice versa;
 * specify the title text displayed in the top left cell;
 * specify the url to your own CSS stylesheet to customise the styling to match your site;
 * specify what to show in any empty cells;
@@ -59,6 +59,9 @@ Finally feplace them to match the styles given for `.catbytag_NOT_IE`
 `	vertical-align:bottom;`
 
 == Changelog ==
+
+= 2.05 =
+Improvements to the MySQL Querys used for better efficiency
 
 = 2.04 =
 Minor revisions and improvements to the new stylesheet options

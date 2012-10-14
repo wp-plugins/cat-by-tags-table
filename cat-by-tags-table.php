@@ -3,7 +3,7 @@
 Plugin Name: Categories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Categories as rows and Tags as columns in a html table.
-Version: 2.04
+Version: 2.05
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
@@ -176,11 +176,17 @@ function display_cats_by_tag() {
 
 			$colID=$col->term_id;
 
-			$countsql ="SELECT COUNT(*) FROM ( ";
-			$countsql.="(SELECT object_id AS col_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$col->term_id." ) AS cols ";
+			//$countsql ="SELECT COUNT(*) FROM ( ";
+			//$countsql.="(SELECT object_id AS col_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$col->term_id." ) AS cols ";
+			//$countsql.="INNER JOIN ";
+			//$countsql.="(SELECT object_id AS row_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$row->term_id." ) AS rows ";
+			//$countsql.="ON col_object_id = row_object_id ) ";
+
+			$countsql ="SELECT COUNT(object_id) FROM $wpdb->term_relationships ";
 			$countsql.="INNER JOIN ";
 			$countsql.="(SELECT object_id AS row_object_id FROM $wpdb->term_relationships WHERE term_taxonomy_id = ".$row->term_id." ) AS rows ";
-			$countsql.="ON col_object_id = row_object_id ) ";
+			$countsql.="ON object_id = row_object_id ";
+			$countsql.="WHERE term_taxonomy_id = ".$col->term_id." ";
 
 			$countresult = mysql_query($countsql) or die(mysql_error());
 			$countfrow = mysql_fetch_array($countresult) ;
