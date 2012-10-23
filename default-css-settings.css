@@ -1,13 +1,13 @@
 #catbytag,
 .catbytag,
-#catbytag a, 
+#catbytag a,
 .catbytag-column-heading,
 .catbytag-column-heading a {
 	vertical-align:bottom;
 	text-align:left;
 	font-weight:normal;
 }
-#catbytag thead { 
+#catbytag thead {
 	max-height:15em;
 	vertical-align:bottom;
 	border:1px solid #ccc;
@@ -18,7 +18,7 @@
 	vertical-align:bottom;
 	border:1px solid #ccc;
 	text-align:left;
-	width:1em; 
+	width:1em;
 }
 .catbytag_NOT_IE,
 #catbytag .catbytag_NOT_IE { /*Must be a Monotype font*/
@@ -28,11 +28,12 @@
 	vertical-align:bottom;
 }
 .catbytag_IEONLY,
-#catbytag .catbytag_IEONLY { /*Nifty Rotate Text thing for Internet Explorer (IE)*/ 
-	font-weight:normal;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */ 
-	max-height:7em;		/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */ 
-	writing-mode:tb-rl;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */ 
-	filter:flipv fliph;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */ 
+#catbytag .catbytag_IEONLY { /*Nifty Rotate Text thing for Internet Explorer (IE)*/
+	font-weight:normal !important;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
+	min-height:7em !important;		/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
+	max-height:7em !important;		/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
+	writing-mode:tb-rl !important;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
+	filter:flipv fliph !important;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
 }
 #catbytag h3{
 	font-weight:normal;

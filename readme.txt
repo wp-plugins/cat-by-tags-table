@@ -4,7 +4,7 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, pivot, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
 Tested up to: 3.4.2
-Stable tag: 2.05
+Stable tag: 2.06
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -49,9 +49,9 @@ Internet Explorer will render the header as text rotated rather than stacked ver
 
 However if you have problems only in Internet Explorer, then its probably these "nifty rotate text" css rules. 
 To fix this edit the stylesheet (either the default one called `default-css-settings.css` via the plugin editor, or your own external one if you have used the option above) and completely delete the two lines marked that look like this...
-`	max-height:7em;`
-`	writing-mode:tb-rl;` 
-`	filter:flipv fliph;` 
+`	max-height:7em !important;`
+`	writing-mode:tb-rl !important;` 
+`	filter:flipv fliph !important;` 
 Finally feplace them to match the styles given for `.catbytag_NOT_IE`
 `	max-width:0.5em;`
 `	word-wrap: break-word;`
@@ -59,6 +59,9 @@ Finally feplace them to match the styles given for `.catbytag_NOT_IE`
 `	vertical-align:bottom;`
 
 == Changelog ==
+
+= 2.06 =
+Further improvements to the MySQL Querys for even better efficiency
 
 = 2.05 =
 Improvements to the MySQL Querys used for better efficiency
