@@ -55,7 +55,7 @@ To fix this edit the stylesheet (either the default one called `default-css-sett
 Finally feplace them to match the styles given for `.catbytag_NOT_IE`
 `	max-width:0.5em;`
 `	word-wrap: break-word;`
-`	font-family:'Lucida Cons`
+`	font-family:'Lucida Console',Monotype;`
 `	vertical-align:bottom;`
 
 == Changelog ==
