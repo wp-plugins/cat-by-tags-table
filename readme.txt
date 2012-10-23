@@ -48,11 +48,11 @@ Finally provide the URL to your new stylesheet in the options.
 Internet Explorer will render the header as text rotated rather than stacked vertically, this usually looks much better.
 
 However if you have problems only in Internet Explorer, then its probably these "nifty rotate text" css rules. 
-To fix this edit the stylesheet (either the default one called `default-css-settings.css` via the plugin editor, or your own external one if you have used the option above) and completely delete the two lines marked that look like this...
+To fix this edit the stylesheet (either the default one called `default-css-settings.css` via the plugin editor, or your own external one if you have used the option above) and completely delete the lines that look like this...
 `	max-height:7em !important;`
 `	writing-mode:tb-rl !important;` 
 `	filter:flipv fliph !important;` 
-Finally feplace them to match the styles given for `.catbytag_NOT_IE`
+Finally replace them to match the styles given for `.catbytag_NOT_IE`
 `	max-width:0.5em;`
 `	word-wrap: break-word;`
 `	font-family:'Lucida Cons`
@@ -90,10 +90,19 @@ Tidy up a few minor bits and bobs
 = 1.01 =
 First stable release
 
+= 1000.01 =
+Improved SQL in the custom version to display images 
+
 = 1000.00 =
 A custom version to display images 
 
 == Upgrade Notice ==
+
+= 2.06 =
+Further improvements to the MySQL Querys for even better efficiency
+
+= 2.05 =
+Improvements to the MySQL Querys used for better efficiency
 
 = 2.04 =
 Improved option to link to an external stylesheet of your choice
