@@ -3,8 +3,8 @@ Contributors: haroldstreet
 Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, pivot, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.7
-Tested up to: 3.4.2
-Stable tag: 2.06
+Tested up to: 3.5.0
+Stable tag: 2.07
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -60,6 +60,9 @@ Finally feplace them to match the styles given for `.catbytag_NOT_IE`
 
 == Changelog ==
 
+= 2.07 =
+Update to ensure compatability with WP 3.5.0
+
 = 2.06 =
 Further improvements to the MySQL Querys for even better efficiency
 
@@ -94,6 +97,15 @@ First stable release
 A custom version to display images 
 
 == Upgrade Notice ==
+
+= 2.07 =
+Update to ensure compatability with WP 3.5.0
+
+= 2.06 =
+Further improvements to the MySQL Querys for even better efficiency
+
+= 2.05 =
+Improvements to the MySQL Querys used for better efficiency
 
 = 2.04 =
 Improved option to link to an external stylesheet of your choice
