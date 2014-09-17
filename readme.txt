@@ -2,9 +2,9 @@
 Contributors: haroldstreet
 Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, pivot, embed, list, navigation, menu, post, page, plugin, free
-Requires at least: 2.7
+Requires at least: 2.0
 Tested up to: 4.0
-Stable tag: 2.07
+Stable tag: 2.08
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -58,7 +58,31 @@ Finally feplace them to match the styles given for `.catbytag_NOT_IE`
 `	font-family:'Lucida Console',Monotype;`
 `	vertical-align:bottom;`
 
+= Can I change the sort order of how the Cats and Tags are displayed =
+You need to edit the following lines in the plugin file `cat-by-tags-table.php`
+(You can do this from within Wordpress using the plugin editor at `#blogurl#/wp-admin/plugin-editor.php`)
+so from line 111 in the file the plugin default code is....
+`	$cat_args=array(`
+`	 'orderby' => 'name',`
+`	 'order' => 'ASC',`
+`	 'taxonomy' => 'category'`
+`	 );`
+
+$tag_args=array(
+`	 'orderby' => 'name',`
+`	 'order' => 'ASC',`
+`	 'taxonomy' => 'post_tag'`
+`	 );`
+you need to replace the `'ASC'` with `'DESC'` in both places, save the changes and it should work .
+
+= Can I use images instead? =
+Have a look at version 1000.03
+
+
 == Changelog ==
+
+= 2.08 =
+Bug Fix for renumbered categories in WP 4.0
 
 = 2.07 =
 Update to ensure compatability with WP 3.5.0
@@ -93,10 +117,13 @@ Tidy up a few minor bits and bobs
 = 1.01 =
 First stable release
 
-= 1000.00 =
+= 1000.03 =
 A custom version to display images 
 
 == Upgrade Notice ==
+
+= 2.08 =
+Bug Fix for renumbered categories in WP 4.0
 
 = 2.07 =
 Update to ensure compatability with WP 3.5.0
