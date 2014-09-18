@@ -4,7 +4,7 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, pivot, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.0
 Tested up to: 4.0
-Stable tag: 2.08
+Stable tag: 1000.3
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -49,114 +49,46 @@ Internet Explorer will render the header as text rotated rather than stacked ver
 
 However if you have problems only in Internet Explorer, then its probably these "nifty rotate text" css rules. 
 To fix this edit the stylesheet (either the default one called `default-css-settings.css` via the plugin editor, or your own external one if you have used the option above) and completely delete the two lines marked that look like this...
-`	max-height:7em !important;`
-`	writing-mode:tb-rl !important;` 
-`	filter:flipv fliph !important;` 
+`	max-height:7em !important;
+	writing-mode:tb-rl !important;
+	filter:flipv fliph !important;` 
 Finally feplace them to match the styles given for `.catbytag_NOT_IE`
-`	max-width:0.5em;`
-`	word-wrap: break-word;`
-`	font-family:'Lucida Console',Monotype;`
-`	vertical-align:bottom;`
+`	max-width:0.5em;
+	word-wrap: break-word;
+	font-family:'Lucida Console',Monotype;
+	vertical-align:bottom;`
 
 = Can I change the sort order of how the Cats and Tags are displayed =
 You need to edit the following lines in the plugin file `cat-by-tags-table.php`
 (You can do this from within Wordpress using the plugin editor at `#blogurl#/wp-admin/plugin-editor.php`)
 so from line 111 in the file the plugin default code is....
-`	$cat_args=array(`
-`	 'orderby' => 'name',`
-`	 'order' => 'ASC',`
-`	 'taxonomy' => 'category'`
-`	 );`
+`	$cat_args=array(
+	 'orderby' => 'name',
+	 'order' => 'ASC',
+	 'taxonomy' => 'category'
+	 );
 
-$tag_args=array(
-`	 'orderby' => 'name',`
-`	 'order' => 'ASC',`
-`	 'taxonomy' => 'post_tag'`
-`	 );`
+	$tag_args=array(
+	 'orderby' => 'name',
+	 'order' => 'ASC',
+	 'taxonomy' => 'post_tag'
+	 );`
 you need to replace the `'ASC'` with `'DESC'` in both places, save the changes and it should work .
 
 = Can I use images instead? =
-Have a look at version 1000.03
+Have a look at version 1000.03 its adapated specially to use images
 
 
 == Changelog ==
 
 = 1000.03 =
-Bug Fix for renumbered categories in WP 4.0
+No longer counts Draft, Private or Password Protected Posts only Public ones.
 
-= 2.08 =
-Bug Fix for renumbered categories in WP 4.0
-
-= 2.07 =
-Update to ensure compatability with WP 3.5.0
-
-= 2.06 =
-Further improvements to the MySQL Querys for even better efficiency
-
-= 2.05 =
-Improvements to the MySQL Querys used for better efficiency
-
-= 2.04 =
-Minor revisions and improvements to the new stylesheet options
-
-= 2.03 =
-Option to link to an external stylesheet of your choice, instead of just the style element for the td cells
-
-= 2.02 =
-a dud upload - no idea what happened here!
-
-= 2.01 =
-A major revision of the code and some new options
-
-= 1.04 =
-Some minor spelling corrections
-
-= 1.03 =
-New options added
-
-= 1.02 =
-Tidy up a few minor bits and bobs
-
-= 1.01 =
-First stable release
 
 == Upgrade Notice ==
 
 = 1000.03 =
-Bug Fix for renumbered categories in WP 4.0
-
-= 2.08 =
-Bug Fix for renumbered categories in WP 4.0
-
-= 2.07 =
-Update to ensure compatability with WP 3.5.0
-
-= 2.06 =
-Further improvements to the MySQL Querys for even better efficiency
-
-= 2.05 =
-Improvements to the MySQL Querys used for better efficiency
-
-= 2.04 =
-Improved option to link to an external stylesheet of your choice
-
-= 2.03 =
-Option to link to an external stylesheet of your choice, instead of just styling the element for the td cells
-
-= 2.01 =
-A major revision of the code and some new options
-
-= 1.04 =
-Some minor spelling corrections
-
-= 1.03 =
-Upgrade to customise contents of an empty cell
-
-= 1.02 =
-I wouldn't bother updating for this
-
-= 1.01 =
-First stable release
+No longer counts Draft, Private or Password Protected Posts only Public ones.
 
 == License ==
 
