@@ -68,7 +68,7 @@ so from line 111 in the file the plugin default code is....
 `	 'taxonomy' => 'category'`
 `	 );`
 
-$tag_args=array(
+`	$tag_args=array(`
 `	 'orderby' => 'name',`
 `	 'order' => 'ASC',`
 `	 'taxonomy' => 'post_tag'`
