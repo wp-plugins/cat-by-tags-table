@@ -12,7 +12,7 @@ Stable tag: 2.09
 
 **'Categories by Tag Table'** allows you to display all your Categories as rows and Tags as columns in a html pivot table.
 Once activated it will replace the text '**[CATS_BY_TAGS_TABLE]**' in any post or page with a table.
-Each cell displays the number of posts that are in both the category and have the tag, and a URL link to those posts.
+Each cell displays the number of published posts that are in both the category and have the tag, and a URL link to those posts.
 It might be a useful way to list your content for navigation or embed as a menu.
 
 The options menu allows you to:
@@ -74,6 +74,11 @@ so from line 111 in the file the plugin default code is....
 	 'taxonomy' => 'post_tag'
 	 );`
 you need to replace the `'ASC'` with `'DESC'` in both places, save the changes and it should work .
+
+= Can I display the count of all posts (drafts, private + password protected) not just those that are published? =
+Yes just delete the following line...
+`	$countsql.="JOIN $wpdb->posts AS E ON E.`ID` = A.object_id AND E.post_status = 'publish' AND post_password = '' ";`
+from the plugin file `cat-by-tags-table.php`
 
 = Can I use images instead? =
 Have a look at version 1000.03 its adapated specially to use images
