@@ -3,7 +3,7 @@
 Plugin Name: Categories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Categories as rows and Tags as columns in a html pivot table.
-Version: 2.08
+Version: 2.09
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
@@ -176,15 +176,16 @@ function display_cats_by_tag() {
 
 			$colID=$col->term_id;
 
-$countsql ="SELECT COUNT(A.object_id) FROM $wpdb->term_relationships AS A ";
+$countsql ="SELECT COUNT(A.object_id) AS countposts FROM $wpdb->term_relationships AS A ";
 $countsql.="JOIN $wpdb->term_taxonomy AS B ON A.`term_taxonomy_id` = B.`term_taxonomy_id` ";
 $countsql.="JOIN $wpdb->term_relationships AS C ON C.object_id = A.object_id ";
 $countsql.="JOIN $wpdb->term_taxonomy AS D ON C.`term_taxonomy_id` = D.`term_taxonomy_id` AND D.term_id = ".$row->term_id." ";
+$countsql.="JOIN $wpdb->posts AS E ON E.`ID` = A.object_id AND E.post_status = 'publish' AND post_password = '' ";
 $countsql.="WHERE B.term_id = ".$col->term_id." ";
 
 			$countresult = mysql_query($countsql) or die(mysql_error());
 			$countfrow = mysql_fetch_array($countresult) ;
-			$count = $countfrow[0] ;
+			$count = $countfrow['countposts'] ;
 
 			$tablehtml .= '<td class="catbytag">';
 			if($count>=1){

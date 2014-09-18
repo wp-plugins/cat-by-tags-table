@@ -4,7 +4,7 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, pivot, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.0
 Tested up to: 4.0
-Stable tag: 2.08
+Stable tag: 2.09
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -49,37 +49,40 @@ Internet Explorer will render the header as text rotated rather than stacked ver
 
 However if you have problems only in Internet Explorer, then its probably these "nifty rotate text" css rules. 
 To fix this edit the stylesheet (either the default one called `default-css-settings.css` via the plugin editor, or your own external one if you have used the option above) and completely delete the two lines marked that look like this...
-`	max-height:7em !important;`
-`	writing-mode:tb-rl !important;` 
-`	filter:flipv fliph !important;` 
+`	max-height:7em !important;
+	writing-mode:tb-rl !important;
+	filter:flipv fliph !important;` 
 Finally feplace them to match the styles given for `.catbytag_NOT_IE`
-`	max-width:0.5em;`
-`	word-wrap: break-word;`
-`	font-family:'Lucida Console',Monotype;`
-`	vertical-align:bottom;`
+`	max-width:0.5em;
+	word-wrap: break-word;
+	font-family:'Lucida Console',Monotype;
+	vertical-align:bottom;`
 
 = Can I change the sort order of how the Cats and Tags are displayed =
 You need to edit the following lines in the plugin file `cat-by-tags-table.php`
 (You can do this from within Wordpress using the plugin editor at `#blogurl#/wp-admin/plugin-editor.php`)
 so from line 111 in the file the plugin default code is....
-`	$cat_args=array(`
-`	 'orderby' => 'name',`
-`	 'order' => 'ASC',`
-`	 'taxonomy' => 'category'`
-`	 );`
+`	$cat_args=array(
+	 'orderby' => 'name',
+	 'order' => 'ASC',
+	 'taxonomy' => 'category'
+	 );
 
-`	$tag_args=array(`
-`	 'orderby' => 'name',`
-`	 'order' => 'ASC',`
-`	 'taxonomy' => 'post_tag'`
-`	 );`
+	$tag_args=array(
+	 'orderby' => 'name',
+	 'order' => 'ASC',
+	 'taxonomy' => 'post_tag'
+	 );`
 you need to replace the `'ASC'` with `'DESC'` in both places, save the changes and it should work .
 
 = Can I use images instead? =
-Have a look at version 1000.03
+Have a look at version 1000.03 its adapated specially to use images
 
 
 == Changelog ==
+
+= 2.09 =
+No longer counts Draft, Private or Password Protected Posts only Public ones.
 
 = 2.08 =
 Bug Fix for renumbered categories in WP 4.0
@@ -120,7 +123,11 @@ First stable release
 = 1000.03 =
 A custom version to display images 
 
+
 == Upgrade Notice ==
+
+= 2.09 =
+No longer counts Draft, Private or Password Protected Posts only Public ones.
 
 = 2.08 =
 Bug Fix for renumbered categories in WP 4.0
@@ -154,6 +161,7 @@ I wouldn't bother updating for this
 
 = 1.01 =
 First stable release
+
 
 == License ==
 
