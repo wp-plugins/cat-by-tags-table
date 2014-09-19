@@ -87,7 +87,7 @@ Have a look at version 1000.03 its adapated specially to use images
 == Changelog ==
 
 = 2.09 =
-No longer counts Draft, Private or Password Protected Posts only Public ones.
+No longer counts Draft or Private Posts only Public ones.
 
 = 2.08 =
 Bug Fix for renumbered categories in WP 4.0
