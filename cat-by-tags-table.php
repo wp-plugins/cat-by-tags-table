@@ -182,7 +182,7 @@ $countsql ="SELECT COUNT(A.object_id) FROM $wpdb->term_relationships AS A ";
 $countsql.="JOIN $wpdb->term_taxonomy AS B ON A.`term_taxonomy_id` = B.`term_taxonomy_id` ";
 $countsql.="JOIN $wpdb->term_relationships AS C ON C.object_id = A.object_id ";
 $countsql.="JOIN $wpdb->term_taxonomy AS D ON C.`term_taxonomy_id` = D.`term_taxonomy_id` AND D.term_id = ".$row->term_id." ";
-$countsql.="JOIN $wpdb->posts AS E ON E.`ID` = A.object_id AND E.post_status = 'publish' AND post_password = '' ";
+$countsql.="JOIN $wpdb->posts AS E ON E.`ID` = A.object_id AND E.post_status = 'publish' ";
 $countsql.="WHERE B.term_id = ".$col->term_id." ";
 
 			$countresult = mysql_query($countsql) or die(mysql_error());
