@@ -75,9 +75,9 @@ so from line 111 in the file the plugin default code is....
 	 );`
 you need to replace the `'ASC'` with `'DESC'` in both places, save the changes and it should work .
 
-= Can I display the count of all posts (drafts, private + password protected) not just those that are published? =
+= Can I display the count of all posts (drafts + private) not just those that are published? =
 Yes just delete the following line...
-`	$countsql.="JOIN $wpdb->posts AS E ON E.`ID` = A.object_id AND E.post_status = 'publish' AND post_password = '' ";`
+`	$countsql.="JOIN $wpdb->posts AS E ON E.ID = A.object_id AND E.post_status = 'publish' ";`
 from the plugin file `cat-by-tags-table.php`
 
 = Can I use images instead? =
