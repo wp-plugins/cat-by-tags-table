@@ -3,8 +3,8 @@ Contributors: haroldstreet
 Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, pivot, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.0
-Tested up to: 4.1
-Stable tag: 2.09
+Tested up to: 4.2
+Stable tag: 2.10
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -86,6 +86,9 @@ Have a look at version 1000.03 its adapated specially to use images
 
 == Changelog ==
 
+= 2.10 =
+Bug Fix for renumbered categories in WP 4.2
+
 = 2.09 =
 No longer counts Draft or Private Posts only Public ones.
 
@@ -130,6 +133,9 @@ A custom version to display images
 
 
 == Upgrade Notice ==
+
+= 2.10 =
+Bug Fix for renumbered categories in WP 4.2
 
 = 2.09 =
 No longer counts Draft, Private or Password Protected Posts only Public ones.

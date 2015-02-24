@@ -3,7 +3,7 @@
 Plugin Name: Categories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Categories as rows and Tags as columns in a html pivot table.
-Version: 2.09
+Version: 2.10
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
@@ -257,7 +257,7 @@ echo "<!-- END CATS-BY-TAG HEADER -->\n";
 }
 
 // Register everything
-load_plugin_textdomain($display_cats_by_tag_textdomain, 'wp-content/plugins/cat-by-tags-table');
+load_plugin_textdomain($display_cats_by_tag_textdomain);
 register_activation_hook(__FILE__, 'display_cats_by_tag_activate');
 register_deactivation_hook(__FILE__, 'display_cats_by_tag_deactivate');
 add_action('admin_menu', 'display_cats_by_tag_admin_menu');
