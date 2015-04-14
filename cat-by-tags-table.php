@@ -3,7 +3,7 @@
 Plugin Name: Categories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Categories as rows and Tags as columns in a html pivot table.
-Version: 2.11
+Version: 2.12
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
@@ -14,9 +14,7 @@ $display_cats_by_tag_textdomain = 'display_cats_by_tag';
 // Add the page to the options menu
 function display_cats_by_tag_admin_menu() {
 	global $display_cats_by_tag_textdomain;
-	if ( function_exists('add_options_page') ) {
-		add_options_page(__('Categories by Tag Table', $display_cats_by_tag_textdomain), __('Categories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
-	}
+	add_options_page(__('Categories by Tag Table', $display_cats_by_tag_textdomain), __('Categories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
 
 	if ( function_exists('register_setting') ) {
 		register_setting('display_cats_by_tag_options','display_cats_by_tag_direction');
@@ -27,7 +25,9 @@ function display_cats_by_tag_admin_menu() {
 	}
 }
 
-//The Admin page
+/**
+ * The Admin page
+ */
 function display_cats_by_tag_admin_page() {
 	global $display_cats_by_tag_version, $display_cats_by_tag_textdomain;
 	$optionvars = array(
@@ -119,7 +119,7 @@ function display_cats_by_tag() {
 
 	$tablehtml = '<div id="catbytag"><table style="border-collapse:collapse;">'; //START HTML
 	//HEADER ROW
-	$tablehtml .= '<thead class="catbytag"><th class="catbytag-title">'.$tabletitletxt.'</th>'; //TAG Title Line
+	$tablehtml .= '<thead class="catbytag"><th class="catbytag-title"><div class="catbytag-title">'.$tabletitletxt.'</div></th>'; //TAG Title Line
 	if($direction==1){ // CATS BY TAG
 		$cols=get_categories($tag_args);
 	}else{  // TAGS BY CAT
@@ -128,11 +128,11 @@ function display_cats_by_tag() {
 	foreach($cols as $col) {
 
 		$tablehtml .= '<th class="catbytag">';
-		// If Internet Explorer do the nifty rotate text thing...
-		$tablehtml .= '<!--[if IE]><div class="catbytag_IEONLY"><![endif]-->';
+		// If Internet Explorer 8 or less  do the nifty rotate text thing...
+		$tablehtml .= '<!--[if lte IE 8]><div class="catbytag_IE8ONLY"><![endif]-->';
 		// If NOT Internet Explorer do the next best thing instead...
-		$tablehtml .= '<!--[if !IE]>-->';
-		$tablehtml .= '<div class="catbytag_NOT_IE">';
+		$tablehtml .= '<!--[if gt IE 8]>-->';
+		$tablehtml .= '<div class="catbytag_NOT_IE8">';
 		$tablehtml .= '<!--<![endif]-->';
 		$tablehtml .= '<div class="catbytag-column-heading">';
 
@@ -208,7 +208,9 @@ function display_cats_by_tag() {
 	return $tablehtml;
 }
 
-//The filter to insert the table
+/**
+ * The filter to insert the table
+ */
 function display_cats_by_tag_filter( $content ) {
 	global $id, $wpdb;
 
@@ -216,7 +218,9 @@ function display_cats_by_tag_filter( $content ) {
 	return preg_replace('#'.preg_quote('[CATS_BY_TAGS_TABLE]', '#').'#', display_cats_by_tag(), $content, 1);
 }
 
-//Activation Hook to add settings
+/**
+ * Activation Hook to add settings
+ */
 function display_cats_by_tag_activate () {
 	// Add the options
 	if ( function_exists('update_option') ) {
@@ -228,7 +232,9 @@ function display_cats_by_tag_activate () {
 	}
 }
 
-//Deactivation Hook to remove settings
+/**
+ * Deactivation Hook to remove settings
+ */
 function display_cats_by_tag_deactivate () {
 	// Remove the options
 	if ( function_exists('delete_option') ) {
@@ -256,7 +262,7 @@ load_plugin_textdomain($display_cats_by_tag_textdomain);
 register_activation_hook(__FILE__, 'display_cats_by_tag_activate');
 register_deactivation_hook(__FILE__, 'display_cats_by_tag_deactivate');
 add_action('admin_menu', 'display_cats_by_tag_admin_menu');
-add_filter('the_content', 'display_cats_by_tag_filter', 10);
+add_filter('the_content', 'display_cats_by_tag_filter', 50);
 add_action('wp_head', 'addHeaderCode');
 
-//NO CLOSING PHP MARKS!!!
+//NO CLOSING PHP

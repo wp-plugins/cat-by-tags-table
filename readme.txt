@@ -4,7 +4,7 @@ Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, pivot, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.0
 Tested up to: 4.1.1
-Stable tag: 2.11
+Stable tag: 2.12
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
 
@@ -44,15 +44,15 @@ You can specify the style most of the table elements through linking to an exter
 The best way to do this is to copy the default stylesheet `default-css-settings.css` (downloaded with the plugin), edit it as you see fit and then save this new file somewhere else on your website. 
 Finally provide the URL to your new stylesheet in the options. 
 
-= The Table Header looks really weird in my version of Internet Explorer =
-Internet Explorer will render the header as text rotated rather than stacked vertically, this usually looks much better.
+= The Table Header looks really weird in my old browser =
+Modern browsers should render the header as text rotated rather than stacked vertically, this usually looks much better.
 
-However if you have problems only in Internet Explorer, then its probably these "nifty rotate text" css rules. 
-To fix this edit the stylesheet (either the default one called `default-css-settings.css` via the plugin editor, or your own external one if you have used the option above) and completely delete the two lines marked that look like this...
+However if you have problems in Internet Explorer, then its probably this "nifty rotate text" css rule. 
+To fix this edit the stylesheet (either the default one called `default-css-settings.css` via the plugin editor, or your own external one if you have used the option above) and completely delete the three lines marked that look like this...
 `	max-height:7em !important;
 	writing-mode:tb-rl !important;
 	filter:flipv fliph !important;` 
-Finally feplace them to match the styles given for `.catbytag_NOT_IE`
+Then replace them with...
 `	max-width:0.5em;
 	word-wrap: break-word;
 	font-family:'Lucida Console',Monotype;
@@ -85,6 +85,9 @@ Have a look at version 1000.03 its adapated specially to use images
 
 
 == Changelog ==
+
+= 2.12 =
+CSS3 solution to rotating Header text
 
 = 2.11 =
 2nd Bug Fix for WP 4.1.1
@@ -136,6 +139,9 @@ A custom version to display images
 
 
 == Upgrade Notice ==
+
+= 2.12 =
+CSS3 solution to rotating Header text
 
 = 2.11 =
 2nd Bug Fix for WP 4.1.1

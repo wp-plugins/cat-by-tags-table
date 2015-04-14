@@ -7,34 +7,37 @@
 	text-align:left;
 	font-weight:normal;
 }
-#catbytag thead {
-	max-height:15em;
-	vertical-align:bottom;
-	border:1px solid #ccc;
-}
+
 #catbytag th,
 #catbytag td {
-	height:100%;
-	vertical-align:bottom;
 	border:1px solid #ccc;
-	text-align:left;
 	width:1em;
 }
-.catbytag_NOT_IE,
-#catbytag .catbytag_NOT_IE { /*Must be a Monotype font*/
-	max-width:0.5em;
-	word-wrap: break-word;
-	font-family:'Lucida Console',Monotype;
+
+th.catbytag-title {
 	vertical-align:bottom;
+	height: 7em !important; /* Ajust manually to set the height of your Header row*/
+	white-space:nowrap;
 }
-.catbytag_IEONLY,
-#catbytag .catbytag_IEONLY { /*Nifty Rotate Text thing for Internet Explorer (IE)*/
-	font-weight:normal !important;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
-	min-height:7em !important;		/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
-	max-height:7em !important;		/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
-	writing-mode:tb-rl !important;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
-	filter:flipv fliph !important;	/* If problems in IE delete and replace to match .catbytag_NOT_IE as above */
+
+.catbytag_NOT_IE8,
+#catbytag-column-heading .catbytag_NOT_IE8 {
+	margin: 0 0 -2px 4px;
+	white-space:nowrap;
+	max-width:0.5em;
+	-ms-transform: rotate(-90deg); /* Nifty Rotate Text thing for IE 9 */
+	-webkit-transform: rotate(-90deg); /* Nifty Rotate Text thing for Chrome, Safari, Opera */
+	transform: rotate(-90deg); /* Nifty Rotate Text thing for Other CSS3 Browsers */
 }
+
+.catbytag_IE8ONLY,
+#catbytag-column-heading .catbytag_IE8ONLY { /*Nifty Rotate Text thing for Internet Explorer (IE 8)*/
+	height: 7em !important; /* Ajust manually to set the height of your Header row*/
+	writing-mode: tb-rl !important;	/* If problems in IE delete tb-rl */
+	filter:fliph flipv !important;	/* If problems in IE delete */
+}
+
 #catbytag h3{
 	font-weight:normal;
+	padding:0 0.5em;
 }
