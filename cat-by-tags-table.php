@@ -3,7 +3,7 @@
 Plugin Name: Categories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Categories as rows and Tags as columns in a html pivot table.
-Version: 2.12
+Version: 2.13
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
@@ -14,8 +14,9 @@ $display_cats_by_tag_textdomain = 'display_cats_by_tag';
 // Add the page to the options menu
 function display_cats_by_tag_admin_menu() {
 	global $display_cats_by_tag_textdomain;
-	add_options_page(__('Categories by Tag Table', $display_cats_by_tag_textdomain), __('Categories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
-
+	if ( function_exists('add_options_page') ) {
+		add_options_page(__('Categories by Tag Table', $display_cats_by_tag_textdomain), __('Categories by Tag', $display_cats_by_tag_textdomain), 'manage_options', __FILE__, 'display_cats_by_tag_admin_page');
+	}
 	if ( function_exists('register_setting') ) {
 		register_setting('display_cats_by_tag_options','display_cats_by_tag_direction');
 		register_setting('display_cats_by_tag_options','display_cats_by_tag_table_title');
@@ -108,31 +109,35 @@ function display_cats_by_tag() {
 	$cat_args=array(
 	  'orderby' => 'name',
 	  'order' => 'ASC',
+	  'hide_empty' => 1,
 	  'taxonomy' => 'category'
 	  );
 
 	$tag_args=array(
 	  'orderby' => 'name',
 	  'order' => 'ASC',
+	  'hide_empty' => 1,
 	  'taxonomy' => 'post_tag'
 	  );
 
 	$tablehtml = '<div id="catbytag"><table style="border-collapse:collapse;">'; //START HTML
 	//HEADER ROW
-	$tablehtml .= '<thead class="catbytag"><th class="catbytag-title"><div class="catbytag-title">'.$tabletitletxt.'</div></th>'; //TAG Title Line
+	$tablehtml .= '<thead class="catbytag"><th class="catbytag-title"><div class="catbytag-title">'.$tabletitletxt.'</div></th>'."\n"; //TAG Title Line
 	if($direction==1){ // CATS BY TAG
 		$cols=get_categories($tag_args);
 	}else{  // TAGS BY CAT
 		$cols=get_categories($cat_args);
 	}
+	$emptyrow='';
 	foreach($cols as $col) {
 
 		$tablehtml .= '<th class="catbytag">';
-		// If Internet Explorer 8 or less  do the nifty rotate text thing...
-		$tablehtml .= '<!--[if lte IE 8]><div class="catbytag_IE8ONLY"><![endif]-->';
-		// If NOT Internet Explorer do the next best thing instead...
+		// If Internet Explorer 8 or less  do the old nifty rotate text thing...
+		$tablehtml .= '<!--[if IE 8]><div class="catbytag_IE8ONLY"><![endif]-->';
+		$tablehtml .= '<!--[if lt IE 8]><div class="catbytag_IE7"><![endif]-->';
+		// If NOT Internet Explorer do the CSS3 rotate thing instead...
 		$tablehtml .= '<!--[if gt IE 8]>-->';
-		$tablehtml .= '<div class="catbytag_NOT_IE8">';
+		$tablehtml .= '<div class="catbytag_CSS3">';
 		$tablehtml .= '<!--<![endif]-->';
 		$tablehtml .= '<div class="catbytag-column-heading">';
 
@@ -147,9 +152,10 @@ function display_cats_by_tag() {
 
 		$tablehtml .= '</div>';
 		$tablehtml .= '</div>';
-		$tablehtml .= '</th>';
+		$tablehtml .= '</th>'."\n";
+		$emptyrow .='<td class="catbytag">'.$emptycell.'</td>';
 	}
-	$tablehtml .= '</thead>';
+	$tablehtml .= '</thead>'."\n";
 
 	//TABLE ROWS
 	if($direction==1){ // CATS BY TAG
@@ -158,17 +164,18 @@ function display_cats_by_tag() {
 		$rows=get_categories($tag_args);
 	}
 	foreach($rows as $row) {
-		$tablehtml .= '<tr><td class="catbytag-row-heading"><a href="';
+		$rowstarthtml = '<tr><td class="catbytag-row-heading"><a href="';
 		if($direction==1){  // CATS BY TAG
-			$tablehtml .= get_category_link( $row->term_id );
+			$rowstarthtml .= get_category_link( $row->term_id );
 			$cols=get_categories($tag_args);
 		}else{ // TAGS BY CAT
-			$tablehtml .= '?tag='.urlencode($row->slug);
+			$rowstarthtml .= '?tag='.urlencode($row->slug);
 			$cols=get_categories($cat_args);
 		}
 
 		$rowname = str_replace($replace_text,"",$row->name);
-		$tablehtml .= '" title="' . sprintf( __( "View all %s" ), $row->name ) . '" ' . '>' . $rowname.'</a></td>';
+		$rowstarthtml .= '" title="' . sprintf( __( "View all %s" ), $row->name ) . '" ' . '>' . $rowname.'</a></td>';
+		$rowhtml = '';
 		foreach($cols as $col) {
 
 			$colID=$col->term_id;
@@ -184,7 +191,7 @@ function display_cats_by_tag() {
 			$countfrow = mysql_fetch_array($countresult) ;
 			$count = $countfrow['countposts'] ;
 
-			$tablehtml .= '<td class="catbytag">';
+			$rowhtml .= '<td class="catbytag">';
 			if($count>=1){
 				if($direction==1){ // CATS BY TAG
 					$catID = $row->term_id;
@@ -197,15 +204,19 @@ function display_cats_by_tag() {
 					$tagname = $row->name;
 					$catname = $col->name;
 				}
-				$tablehtml .= '<a href="'.get_category_link( $catID ).'?&amp;tag='.urlencode($tagslug).'" title="View '.$count." ".sprintf( __( "%s" ), $tagname ).sprintf( __( " %s" ), $catname ).'"><b>'.$count.'</b></a>';
-			}else{$tablehtml .= $emptycell;}
-			$tablehtml .= '</td>';
+				$rowhtml .= '<a href="'.get_category_link( $catID ).'?&amp;tag='.urlencode($tagslug).'" title="View '.$count." ".sprintf( __( "%s" ), $tagname ).sprintf( __( " %s" ), $catname ).'"><b>'.$count.'</b></a>';
+			}else{$rowhtml .= $emptycell;}
+			$rowhtml .= '</td>';
 		}
-	$tablehtml .= '</tr>';
+		if($rowhtml<>$emptyrow){
+			$tablehtml .= $rowstarthtml.$rowhtml.'</tr>'."\n";
+		} else {
+			$tablehtml .= "<!-- empty row -->\n";
+		}
 	}
-	$tablehtml .= '</table></div>';
+	$tablehtml .= '</table></div>'."\n";
 
-	return $tablehtml;
+	return $tablehtml."\n<!-- ".$emptyrow."-->\n";
 }
 
 /**

@@ -20,8 +20,8 @@ th.catbytag-title {
 	white-space:nowrap;
 }
 
-.catbytag_NOT_IE8,
-#catbytag-column-heading .catbytag_NOT_IE8 {
+.catbytag_CSS3,
+#catbytag-column-heading .catbytag_CSS3 {
 	margin: 0 0 -2px 4px;
 	white-space:nowrap;
 	max-width:0.5em;
@@ -35,6 +35,13 @@ th.catbytag-title {
 	height: 7em !important; /* Ajust manually to set the height of your Header row*/
 	writing-mode: tb-rl !important;	/* If problems in IE delete tb-rl */
 	filter:fliph flipv !important;	/* If problems in IE delete */
+}
+.catbytag_IE7,
+#catbytag-column-heading .catbytag_IE7 { /* Stacked text alternative */
+	max-width:0.5em;
+	word-wrap: break-word;
+	font-family:'Lucida Console',Monotype;
+	vertical-align:bottom;
 }
 
 #catbytag h3{
