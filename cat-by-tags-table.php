@@ -3,7 +3,7 @@
 Plugin Name: Categories by Tag Table
 Plugin URI: http://wordpress.org/extend/plugins/cat-by-tags-table/
 Description: Display all your Categories as rows and Tags as columns in a html pivot table.
-Version: 2.13
+Version: 2.14
 Author: haroldstreet
 Author URI: http://www.haroldstreet.org.uk/other/?page_id=266
 License: GPL2
@@ -187,9 +187,12 @@ function display_cats_by_tag() {
 			$countsql.="JOIN $wpdb->posts AS E ON E.`ID` = A.object_id AND E.post_status = 'publish' ";
 			$countsql.="WHERE B.term_id = ".$col->term_id." ";
 
-			$countresult = mysql_query($countsql) or die(mysql_error());
-			$countfrow = mysql_fetch_array($countresult) ;
-			$count = $countfrow['countposts'] ;
+			//$countresult = mysql_query($countsql) or die(mysql_error());
+			//$countfrow = mysql_fetch_array($countresult) ;
+			//$count = $countfrow['countposts'] ;
+
+			$count = $wpdb->get_var($countsql);
+
 
 			$rowhtml .= '<td class="catbytag">';
 			if($count>=1){
