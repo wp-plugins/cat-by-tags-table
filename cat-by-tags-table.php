@@ -146,6 +146,7 @@ function display_cats_by_tag() {
 		}else{ // TAGS BY CAT
 			$tablehtml .= '<a href="'.get_category_link( $col->term_id ).'">';
 		}
+
 		$name = substr(str_replace($replace_text,"",$col->name),0,15);
 		if(($name=="5*")||($name=="4*")||($name=="3*")||($name=="2*")||($name=="1*")){
 			$name = '<img src="' . get_bloginfo('wpurl') . '/wp-content/plugins/cat-by-tags-table/'.substr($name,0,1).'-star.png">';
@@ -221,6 +222,7 @@ function display_cats_by_tag() {
 	}
 	$tablehtml .= '</table></div>'."\n";
 
+	return $tablehtml."\n<!-- ".$emptyrow."-->\n";
 }
 
 /**
