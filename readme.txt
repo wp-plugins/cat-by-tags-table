@@ -81,7 +81,7 @@ Yes just delete the following line...
 from the plugin file `cat-by-tags-table.php`
 
 = Can I use images instead? =
-Have a look at version 1000.03 its adapated specially to use images
+Have a look at version 1002.14 its adapated specially to use images
 
 
 == Changelog ==
