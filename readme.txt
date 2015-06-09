@@ -3,7 +3,7 @@ Contributors: haroldstreet
 Donate link: http://www.haroldstreet.org.uk/thanks/
 Tags: html, table, categories, category, tags, tag, pivot, embed, list, navigation, menu, post, page, plugin, free
 Requires at least: 2.0
-Tested up to: 4.1.2
+Tested up to: 4.2.2
 Stable tag: 2.14
 
 'Categories by Tag Table' displays all your Categories as rows and Tags as columns in a html table.
